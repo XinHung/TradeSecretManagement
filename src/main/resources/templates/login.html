@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div th:insert="~{header :: head}"></div>
+</head>
+<body>
+<div th:insert="~{header :: navbar}"></div>
+<br><br><br><br>
+<div class="container">
+	<h2 class="text-center">員工登入</h2>
+	<p class="text-danger text-center fw-bold" th:text="${errorMsg}"></p>
+	<form th:action="@{./login}" method="post">
+		<table class="table table-borderless">
+			<tr>
+				<td class="align-middle fw-bold" align="right" width="20%">工號</td>
+				<td class="align-middle text-center" width="80%">
+					<input class="form-control" type="text" placeholder="工號" id="empId" name="empId" maxlength="10" required />
+				</td>
+			</tr>
+			<tr>
+				<td class="align-middle fw-bold" align="right" width="20%">密碼</td>
+				<td class="align-middle text-center" width="80%">
+					<input class="form-control" type="password" placeholder="密碼" id="empPwd" name="empPwd" required />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="align-middle text-center">
+					<button class="btn btn-primary" type="submit" id="loginBtn" name="loginBtn">登入</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<div th:insert="~{header :: bottomJS}"></div>
+</body>
+</html>
