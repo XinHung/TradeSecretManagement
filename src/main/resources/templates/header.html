@@ -25,6 +25,9 @@
 
   	<!-- Template Main CSS File -->
   	<link href="../css/style.css" rel="stylesheet">
+  	
+  	<!-- JS -->
+  	<script src="../js/jquery-3.7.1.min.js"></script>
 </th:block>
 </head>
 <body>
@@ -37,8 +40,11 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="./home#hero">首頁</a></li>
+          <li><a class="nav-link scrollto" href="./home#hero">首頁</a></li>
           <li><a class="nav-link scrollto" href="./home#about">關於營業秘密</a></li>
+          <li th:if="${session.user} != null">
+			  <a class="nav-link scrollto" href="./register#register">登記營業秘密</a>
+		  </li>
           <li th:if="${session.user} == null">
 			  <a class="nav-link scrollto" href="./login">登入</a>
           </li>

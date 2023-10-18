@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <div th:insert="~{header :: head}"></div>
+  <title>登記營業秘密</title>
+</head>
+<body>
+<div th:insert="~{header :: navbar}"></div>
+<br>
+<div class="container">
+  <section id="register">
+	<h2 class="text-center">登記營業秘密</h2>
+	<p class="text-danger text-center fw-bold" th:text="${errorMsg}"></p>
+	<form th:action="@{./register}" method="post">
+		<table class="table table-bordered">
+			<tr>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">登記人工號</td>
+				<td class="align-middle text-center" width="35%">
+					<input class="form-control" type="text" disabled th:value="${empId}" id="empId" name="empId" />
+				</td>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">登記人姓名</td>
+				<td class="align-middle text-center" width="35%">
+					<input class="form-control" type="text" disabled th:value="${empName}" id="empName" name="empName" />
+				</td>
+			</tr>
+			<div>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">部門名稱</td>
+				<td class="align-middle" width="35%">
+					<input class="form-control" type="text" disabled th:value="${empDept}" id="empDept" name="empDept" />
+				</td>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">安全等級</td>
+				<td class="align-middle" width="35%">
+					<label th:each="security: ${securityList}">
+						<input type="radio" name="security" th:value="${security.level}" /><span th:text="${security.level}"></span>&nbsp;&nbsp;
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">團隊成員</td>
+				<td class="align-middle" colspan="3">
+					<button type="button" class="btn btn-success btn-sm"><i class="bi bi-plus-lg"></i></button>
+				</td>
+			</tr>
+			<tr>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">營業秘密名稱</td>
+				<td class="align-middle text-center" colspan="3">
+					<input class="form-control" type="text" placeholder="營業秘密名稱" id="tsName" name="tsName" required />
+				</td>
+			</tr>
+			<tr>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">是否有專利提案</td>
+				<td class="align-middle" width="35%">
+					<input group="ip" type="radio" id="hasIpY" name="hasIp" value="Y" /><label for="hasIpY">是</label>&nbsp;&nbsp;
+					<input group="ip" type="radio" id="hasIpN" name="hasIp" value="N" checked /><label for="hasIpN">否</label>
+				</td>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">專利提案名稱</td>
+				<td class="align-middle text-center" width="35%">
+					<input class="form-control" type="text" disabled id="ipName" name="ipName" />
+				</td>
+			</tr>
+			<tr>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">產品</td>
+				<td class="align-middle" colspan="3">
+					<table class="table table-bordered table-sm">
+						<tr>
+							<td class="align-middle text-center  bg-light"></td>
+							<td class="align-middle text-center bg-light" th:each="productLevel: ${productLevelList}" th:text="${productLevel.name}"></td>
+						</tr>
+						<tr th:each="productType: ${productTypeList}">
+							<td class="align-middle text-center bg-light" th:text=${productType.name}></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="align-middle fw-bold bg-light" align="center" width="15%">備註</td>
+				<td class="align-middle text-center" colspan="3">
+					<textarea class="form-control" type="text" placeholder="請簡要說明：&#10;1.營業秘密動機&#10;2.改善了什麼問題&#10;3.如何改善&#10;4.如何保護營業秘密" 
+						id="remark" name="remark" required rows="10"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="align-middle text-center">
+					<button class="btn btn-primary" type="submit" id="submitBtn" name="submitBtn">填寫完成</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+  </section>
+</div>
+
+<div th:insert="~{header :: bottomJS}"></div>
+
+<script>
+$(document).ready(function() {
+	$('#hasIpY, #hasIpN').click(function() {
+		var checked = $('#hasIpY').prop('checked');
+		if(checked) {
+			$('#ipName').prop('disabled', false);
+		} else {
+			$('#ipName').val('');
+			$('#ipName').prop('disabled', true);
+		}
+	});
+});
+</script>
+</body>
+</html>
