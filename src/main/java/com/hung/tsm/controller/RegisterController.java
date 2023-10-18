@@ -20,11 +20,11 @@ public class RegisterController {
 	@Autowired
 	private SecurityLevelDao securityDao;
 	@Autowired
-	private ProductTypeDao productType;
+	private ProductTypeDao productTypeDao;
 	@Autowired
-	private ProductLevelDao productLevel;
+	private ProductLevelDao productLevelDao;
 	@Autowired
-	private ProductInfoDao productInfo;
+	private ProductInfoDao productInfoDao;
 	
 	@GetMapping("register")
 	public String register(HttpSession session, Model model) {
@@ -36,9 +36,9 @@ public class RegisterController {
 			model.addAttribute("empName", user.getEmpName());
 			model.addAttribute("empDept", user.getDepartment());
 			model.addAttribute("securityList", securityDao.getAllSecurity());
-			model.addAttribute("productTypeList", productType.getAllProductType());
-			model.addAttribute("productLevelList", productLevel.getAllProductLevel());
-			model.addAttribute("productInfoList", productInfo.getAllProductInfo());
+			model.addAttribute("productTypeList", productTypeDao.getAllProductType());
+			model.addAttribute("productLevelList", productLevelDao.getAllProductLevel());
+			model.addAttribute("productInfoList", productInfoDao.getAllProductInfo());
 		}
 		return "TradeSecret/register";
 	}

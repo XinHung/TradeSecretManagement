@@ -28,7 +28,7 @@ public class ProductInfoDao {
 	}
 	
 	/**
-     * 內部類別，把結果集轉為 User 物件
+     * 內部類別，把結果集轉為 ProductInfo 物件
      */
     private class ProductInfoRowMapper implements RowMapper<ProductInfo> {
         @Override
