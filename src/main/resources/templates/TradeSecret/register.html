@@ -67,7 +67,16 @@
 							<td class="align-middle text-center bg-light" th:each="productLevel: ${productLevelList}" th:text="${productLevel.name}"></td>
 						</tr>
 						<tr th:each="productType: ${productTypeList}">
-							<td class="align-middle text-center bg-light" th:text=${productType.name}></td>
+							<td th:text="${productType.name}" class="align-middle text-center bg-light"></td>
+							<td th:each="productLevel: ${productLevelList}" class="align-middle">
+								<div th:each="productInfo: ${productInfoList}">
+									<span th:if="${productInfo.typeId} == ${productType.id} and ${productInfo.levelId} == ${productLevel.id}">
+										<label>
+											<input type="checkbox" name="productInfo" th:value="${productInfo.id}" /><span th:text="${productInfo.name}"></span>
+										</label>
+									</span>
+								</div>
+							</td>
 						</tr>
 					</table>
 				</td>
@@ -103,6 +112,12 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function checkedProduct() {
+	$('[name="productInfo"]:checked').each(function() {
+		console.log($(this).val());
+	});
+}
 </script>
 </body>
 </html>
